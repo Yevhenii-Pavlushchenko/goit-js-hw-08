@@ -82,13 +82,20 @@ const galleryMarkUp = images
   .join("");
 gallery.innerHTML = galleryMarkUp;
 
-gallery.addEventListener("click", oncGallerylick);
+gallery.addEventListener("click", oncGalleryClick);
 
-function oncGallerylick(event) {
+function oncGalleryClick(event) {
   event.preventDefault();
-  const res = event.target.dataset.source;
 
-  console.log(images[0].original);
-  console.log(res);
-  return;
+  if (event.target.tagName !== "IMG") {
+    return;
+  }
+  const currentImg = event.target.dataset.source;
+  console.log(currentImg);
+
+  const instance = basicLightbox.create(
+    `<img src="${currentImg}" width="800" height="600" alt="">`,
+  );
+
+  instance.show();
 }
